@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Env
+.venv/
+venv/
+
+# Environment Variables
+.env
+.env.*
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Alembic / Python cache
+*.pyc
+
+# Pytest
+.pytest_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Logs
+*.log
+
+# SQLAlchemy / SQLite
+*.db
+*.sqlite3
+
+# Mypy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/
+
+# Build Artifacts
+build/
+dist/
+*.egg-info/
+
+# IDEs
+.idea/
+
+# Docker
+docker-data/
