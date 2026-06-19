@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app.models.log import Log
 from app.repositories.log_repository import LogRepository
 from app.schemas.log import LogCreate
-
+from app.common.enums import LogSeverity
 
 class LogService:
 
@@ -26,5 +26,16 @@ class LogService:
 
         return log
 
-    def get_logs(self) -> list[Log]:
-        return self.repository.get_all()
+    def get_logs(
+        self,
+        service_name: str | None = None,
+        severity: LogSeverity | None = None,
+        limit: int = 100,
+        offset: int = 0,
+    ) -> list[Log]:
+        return self.repository.get_logs(
+            service_name=service_name,
+            severity=severity,
+            limit=limit,
+            offset=offset,
+    )
