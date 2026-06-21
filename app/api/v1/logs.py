@@ -5,6 +5,9 @@ from app.dependencies.database import get_db
 from app.schemas.log import LogCreate, LogResponse
 from app.services.log_service import LogService
 from app.common.enums import LogSeverity
+import uuid
+from fastapi import HTTPException
+from app.exceptions import LogNotFoundException
 
 router = APIRouter(prefix="/logs", tags=["logs"])
 
@@ -35,3 +38,19 @@ def get_logs(
         limit=limit,
         offset=offset,
     )
+
+@router.get("/{log_id}", response_model=LogResponse)
+def get_log_by_id(
+    log_id: uuid.UUID,
+    db: Session = Depends(get_db),
+):
+    service = LogService(db)
+
+    try:
+        return service.get_log_by_id(log_id)
+
+    except LogNotFoundException as e:
+        raise HTTPException(
+            status_code=404,
+            detail=str(e)
+        )

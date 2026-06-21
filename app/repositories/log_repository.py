@@ -1,6 +1,6 @@
 from app.common.enums import LogSeverity
 from app.models.log import Log
-
+import uuid
 
 class LogRepository:
 
@@ -37,4 +37,15 @@ class LogRepository:
             .offset(offset)
             .limit(limit)
             .all()
-        )   
+        )      
+    
+    def get_by_id(
+        self,
+        log_id: uuid.UUID
+    ) -> Log | None:
+
+        return (
+            self.db.query(Log)
+            .filter(Log.id == log_id)
+            .first()
+        )

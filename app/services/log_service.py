@@ -4,6 +4,9 @@ from app.models.log import Log
 from app.repositories.log_repository import LogRepository
 from app.schemas.log import LogCreate
 from app.common.enums import LogSeverity
+from app.exceptions import LogNotFoundException
+
+import uuid
 
 class LogService:
 
@@ -39,3 +42,15 @@ class LogService:
             limit=limit,
             offset=offset,
     )
+
+    def get_log_by_id(
+        self,
+        log_id: uuid.UUID
+    ) -> Log:
+
+        log = self.repository.get_by_id(log_id)
+
+        if not log:
+            raise LogNotFoundException()
+
+        return log
