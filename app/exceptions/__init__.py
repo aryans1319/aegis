@@ -1,1 +1,2 @@
 from app.exceptions.log import LogNotFoundException
+from app.exceptions.incident import IncidentNotFoundException
